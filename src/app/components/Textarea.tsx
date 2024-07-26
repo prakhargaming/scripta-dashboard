@@ -5,8 +5,8 @@ import Comboboxy from './Combobox';
 
 // AWS configuration remains the same
 AWS.config.update({
-    accessKeyId: "DO004TC96DEW4WCAJQ7J",
-    secretAccessKey: "stlN1hiEK3nxhzW68nCtZod+cPUU2QCKzl/wsnM32WY", 
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY, 
     endpoint: 'https://nyc3.digitaloceanspaces.com'
 });
 
