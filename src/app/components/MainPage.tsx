@@ -2,33 +2,36 @@
 
 import { useState } from 'react'
 import {
-Dialog,
-DialogBackdrop,
-DialogPanel,
-Menu,
-MenuButton,
-MenuItem,
-MenuItems,
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
 TransitionChild,
 } from '@headlessui/react'
 import {
-Bars3Icon,
-BellIcon,
-Cog6ToothIcon,
-HomeIcon,
-UsersIcon,
-XMarkIcon,
+  Bars3Icon,
+  BellIcon,
+  Cog6ToothIcon,
+  HomeIcon,
+  UsersIcon,
+  XMarkIcon,
+  PaperClipIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Dashboard from './Dashboard';
 import Scored from './Scored-Resumes';
 import Filtered from './Filter-Resumes';
+import Tracker from './Interview-Tracker'
 import Image from 'next/image'
 
 const navigation = [
 { name: 'All Applicants', href: '#', icon: HomeIcon, current: true, component: Dashboard },
-{ name: 'Scored Resumes', href: '#', icon: UsersIcon, current: false, component: Scored },
+{ name: 'Past Questions', href: '#', icon: UsersIcon, current: false, component: Scored },
 { name: 'Filter Resumes', href: '#', icon: MagnifyingGlassIcon, current: false, component: Filtered },
+{ name: 'Interview Dashboard', href: '#', icon: PaperClipIcon, current: false, component: Filtered },
 ]
 
 const teams = [

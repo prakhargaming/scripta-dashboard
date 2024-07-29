@@ -1,5 +1,124 @@
 const people = [
     {
+      name: 'Amit Sharma',
+      title: '.Net Full-Stack Developer',
+      email: 'amit.sharma@example.com',
+      role: 'Member',
+      yearsOfExperience: 6,
+      skills: ['ASP.NET', 'C#', 'JavaScript', 'SQL Server', 'Azure', '.NET'],
+      resumeScore: 82,
+      about: `After reviewing the applicant's resume, I have summarized their key skills and experiences as follows:
+            **Technical Skills:**
+
+            * Programming languages: ASP.NET, C#, JavaScript
+            * Development frameworks: .NET (2.0), VS 2005
+            * Databases: SQL Server 2005, XML
+            * Version control: TFS (Team Foundation Service)
+            * Technologies: Azure (Microsoft Azure Certification - AZ-900)
+
+            **Development Experience:**
+
+            * Senior .Net full-stack developer at Jam Buster Technologies (Mar 2009-Nov 2009) and Symyx Technologies (Pune, India)
+                    + Developed web services and applications using ASP.NET, JavaScript, C#, and SQL Server
+                    + Managed scope, planning, tracking, change control, and mentoring team members
+            * Software Developer/.Net developer at Tieto (Sep 2007-Aug 2008) and Pune, India)
+                    + Analyzed product impact and ensured development was performed as per requirements
+                    + Coordinated with QA to create test scripts and scenarios for enhancements and customizations
+            * Web Developer at Vidushi Infotech (Mar 2005-Aug 2007) and Pune, India)
+                    + Developed websites using ASP.NET, C#, and VS 2005
+                    + Conducted unit testing of code, built, and deployed applications
+
+            **Project Experience:**
+
+            * OCR Tool: Developed a tool for parsing image files and other files generated from scientific instruments
+                    + Allowed users to select experiment types and display nodes in tree view control
+                    + Read information from files and displayed content in UI
+            * Online Car Finance Application: Developed a website to assist users with finance options available for various car models
+                    + Conducted requirement gathering, analysis, client interaction, unit testing, and code build and deployment
+
+            **Education:**
+
+            * Master's in Information Technology - 2005, Manipal University, India
+            `,
+      attachments: [
+        {
+            name: "Resume",
+            size: "200 KB",
+            fileName: "amit.pdf"
+        }
+    ]
+    },
+    {
+      name: 'Melissa Berry',
+      title: 'Customer Service Representative',
+      email: 'melissa.berry@example.com',
+      role: 'Member',
+      yearsOfExperience: 5,
+      skills: ['Customer Service', 'Data Entry', 'Problem Solving', 'Event Planning', 'Inventory Management', 'Office Administration'],
+      resumeScore: 87,
+      about: 'Melissa Berry is experienced in customer service and administrative roles, with a strong background in managing dual-monitor environments and handling multiple programs.',
+      attachments: [
+        { name: 'resume_customer_service_representative.pdf', size: '2.2mb' },
+        { name: 'coverletter_customer_service_representative.pdf', size: '1.5mb' }
+      ]
+    },
+    {
+      name: 'Divine Besong',
+      title: 'Product Owner',
+      email: 'divine.besong@example.com',
+      role: 'Member',
+      yearsOfExperience: 8,
+      skills: ['Agile Methodologies', 'UAT', 'SDLC', 'Business Analysis', 'Data Analytics', 'Team Leadership', 'Problem Solving'],
+      resumeScore: 78,
+      about: 'Divine Besong is an experienced Product Owner with a strong background in agile methodologies, usability testing, and business analysis.',
+      attachments: [
+        { name: 'resume_product_owner.pdf', size: '2.6mb' },
+        { name: 'coverletter_product_owner.pdf', size: '1.9mb' }
+      ]
+    },
+    {
+      name: 'Mana Haeri-June',
+      title: 'Business Intelligence Consultant',
+      email: 'mana.haeri-june@example.com',
+      role: 'Member',
+      yearsOfExperience: 10,
+      skills: ['Tableau', 'OBIEE', 'SQL Server', 'SSIS', 'HP NeoView', 'Data Warehouse', 'CRM'],
+      resumeScore: 80,
+      about: 'Mana Haeri-June is a skilled Business Intelligence Consultant with extensive experience in supply chain management, data warehouse administration, and CRM solutions.',
+      attachments: [
+        { name: 'resume_bi_consultant.pdf', size: '2.8mb' },
+        { name: 'coverletter_bi_consultant.pdf', size: '1.6mb' }
+      ]
+    },
+    {
+      name: 'RAPHAEL EPINGO JR',
+      title: 'Data Analyst',
+      email: 'raphael.epingo@example.com',
+      role: 'Member',
+      yearsOfExperience: 4,
+      skills: ['ETL', 'SQL', 'Tableau', 'Excel', 'Alteryx', 'AWS', 'Azure', 'Data Modeling', 'Agile'],
+      resumeScore: 84,
+      about: 'RAPHAEL EPINGO JR is a proficient Data Analyst with strong skills in data integration, analysis, and visualization using various tools and technologies.',
+      attachments: [
+        { name: 'resume_data_analyst.pdf', size: '2.3mb' },
+        { name: 'coverletter_data_analyst.pdf', size: '1.4mb' }
+      ]
+    },
+    {
+      name: 'Dewayne Hart',
+      title: 'Information Assurance Analyst',
+      email: 'dewayne.hart@example.com',
+      role: 'Member',
+      yearsOfExperience: 7,
+      skills: ['Vulnerability Management', 'Threat Analysis', 'Incident Response', 'Risk Assessment', 'Compliance', 'Information Security'],
+      resumeScore: 84,
+      about: 'Dewayne Hart is an experienced Information Assurance Analyst with expertise in vulnerability management, threat analysis, and incident response.',
+      attachments: [
+        { name: 'resume_information_assurance_analyst.pdf', size: '2.4mb' },
+        { name: 'coverletter_information_assurance_analyst.pdf', size: '1.5mb' }
+      ]
+    },
+    {
       name: 'Lindsay Walton',
       title: 'Front-end Developer',
       email: 'lindsay.walton@example.com',

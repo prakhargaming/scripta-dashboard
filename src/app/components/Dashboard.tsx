@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Modal from './Modal';
+import React, { useState, useEffect } from 'react';
+import Modal from './Name-Modal';
 import people from './people'
   
 
@@ -7,6 +7,7 @@ export default function Scored() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPerson, setSelectedPerson] = useState(null);
     const [selectedPeople, setSelectedPeople] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleNameClick = (person) => {
         setSelectedPerson(person);
@@ -34,28 +35,90 @@ export default function Scored() {
         }
     };
 
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    useEffect(() => {
+        search_table();
+    }, [searchTerm]);
+
+    const search_table = () => {
+        // Declare variables 
+        var input, filter, table, tr, td, i, j;
+        input = document.getElementById("search_field_input");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table_id");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td"); 
+            for (j = 0; j < td.length; j++) {
+                let tdata = td[j];
+                if (tdata) {
+                    if (tdata.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                } 
+            }
+        }
+    };
+
     return (
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
-                <div className="sm:flex-auto">
-                    <h1 className="text-base font-semibold leading-6 text-gray-900">Scored Resumes</h1>
+            <div className="sm:flex-auto">
+                    <h1 className="text-base font-semibold leading-6 text-gray-900">All Applicants</h1>
                     <p className="mt-2 text-sm text-gray-700">
-                        A list of all resumes that have been automatically scored by our system.
-                    </p>
+                        A list of all applicants. Click on a name for more information about their application.
+                    </p>    
                 </div>
-                <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">    
                 </div>
             </div>
+
+            <div className="border-t border-gray-200 my-6"></div>
+
+            <div className="h-1"></div>
+            
+            <div className="flex items-end space-x-4">
+            <div className="flex-grow">
+                <label className="block text-sm font-medium leading-6 text-gray-900">
+                    Filter resumes based on company, role, etc.
+                </label>
+                <div className="mt-2">
+                    <input
+                        type="text"
+                        id="search_field_input"
+                        placeholder="Search..."
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                        className="p-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                    />
+                </div>
+            </div>
+            <button
+                type="button"
+                className="rounded bg-blue-600 px-2 py-1 text-xl font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            >
+                Send Interview
+            </button>
+            </div>
+            
             <div className="mt-8 flow-root">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle">
-                        <table className="min-w-full divide-y divide-gray-300">
+                        <table id="table_id" className="min-w-full divide-y divide-gray-300">
                             <thead>
                                 <tr>
                                     <th scope="col" className="relative px-7 sm:w-12 sm:px-6">
                                         <input
                                             type="checkbox"
-                                            className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                            className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                                             onChange={handleSelectAll}
                                             checked={selectedPeople.length === people.length}
                                         />
@@ -83,7 +146,7 @@ export default function Scored() {
                                         <td className="relative px-7 sm:w-12 sm:px-6">
                                             <input
                                                 type="checkbox"
-                                                className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                                className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                                                 checked={selectedPeople.includes(person.email)}
                                                 onChange={() => handleCheckboxChange(person.email)}
                                             />

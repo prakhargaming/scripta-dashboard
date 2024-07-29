@@ -1,6 +1,6 @@
 import { PaperClipIcon } from '@heroicons/react/20/solid';
 
-export default function Modal({ person, closeModal }) {
+export default function Name_Modal({ person, closeModal }) {
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-black opacity-50 fixed inset-0" onClick={closeModal}></div>
@@ -67,7 +67,11 @@ export default function Modal({ person, closeModal }) {
                                                 </div>
                                             </div>
                                             <div className="ml-4 flex-shrink-0">
-                                                <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
+                                                <a
+                                                    href={`/resumes/${attachment.fileName}`}
+                                                    download
+                                                    className="font-medium text-blue-600 hover:text-blue-500"
+                                                >
                                                     Download
                                                 </a>
                                             </div>
