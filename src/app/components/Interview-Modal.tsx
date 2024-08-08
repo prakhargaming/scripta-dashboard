@@ -1,181 +1,102 @@
-import React, { useState, useEffect } from 'react';
-import Modal from './Name-Modal';
-import Textarea from './Textarea';
-import people from './people';
+import { PaperClipIcon } from '@heroicons/react/20/solid';
 
-export default function Filtered() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedPerson, setSelectedPerson] = useState(null);
-    const [selectedPeople, setSelectedPeople] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const handleNameClick = (person) => {
-        setSelectedPerson(person);
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setSelectedPerson(null);
-    };
-
-    const handleCheckboxChange = (email) => {
-        setSelectedPeople(prev => 
-            prev.includes(email) 
-                ? prev.filter(e => e !== email) 
-                : [...prev, email]
-        );
-    };
-
-    const handleSelectAll = (event) => {
-        if (event.target.checked) {
-            setSelectedPeople(people.map(person => person.email));
-        } else {
-            setSelectedPeople([]);
-        }
-    };
-
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
-    useEffect(() => {
-        const search_table = () => {
-            var input, filter, table, tr, td, i, j;
-            input = document.getElementById("search_field_input");
-            if (!input) return; // Ensure input exists
-            filter = input.value.toUpperCase();
-            table = document.getElementById("table_id");
-            if (!table) return; // Ensure table exists
-            tr = table.getElementsByTagName("tr");
-
-            // Loop through all table rows, and hide those who don't match the search query
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td");
-                for (j = 0; j < td.length; j++) {
-                    let tdata = td[j];
-                    if (tdata) {
-                        if (tdata.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                            break;
-                        } else {
-                            tr[i].style.display = "none";
-                        }
-                    }
-                }
-            }
-        };
-
-        search_table();
-    }, [searchTerm]);
-
+export default function Interview_Modal({ person, closeModal }) {
     return (
-        <div className="px-4 sm:px-6 lg:px-8">
-            <div className="sm:flex sm:items-center">
-                <div className="sm:flex-auto">
-                    <h1 className="text-base font-semibold leading-6 text-gray-900">Filtered Resumes</h1>
-                    <p className="mt-2 text-sm text-gray-700">
-                        Enter a prompt or a job description in the text box below. This prompt will be sent to our system and will show all the resumes that match the prompt. There are two buttons you can press to send a prompt to the system. If your query contains a lot of specific details, press long. If it's a simple question, press short.
-                    </p>
-                    <ul className="list-disc mt-2 text-sm text-gray-700 pl-5 space-y-1">
-                        <li className="ml-4">"Show me resumes that are proficient in Java"</li>
-                        <li className="ml-4">"Resumes that show Python and C++ experience"</li>
-                        <li className="ml-4">"Return all the resumes that match this job description: [paste the job description here]"</li>
-                    </ul>
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-black opacity-50 fixed inset-0" onClick={closeModal}></div>
+            <div className="bg-white shadow sm:rounded-lg relative z-10 w-3/4 h-3/4 overflow-auto">
+                <div className="px-4 py-6 sm:px-6">
+                    <h3 className="text-base font-semibold leading-7 text-gray-900">Applicant Information</h3>
+                    <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and application.</p>
                 </div>
-                <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">    
-                </div>
-            </div>
-            <div className="h-7"></div>
-            <Textarea />
-
-            <div className="border-t border-gray-200 my-6"></div>
-
-            <div className="h-1"></div>
-            
-            <div className="flex items-end space-x-4">
-            <div className="flex-grow">
-                <label className="block text-sm font-medium leading-6 text-gray-900">
-                    Filter resumes based on company, role, etc.
-                </label>
-                <div className="mt-2">
-                    <input
-                        type="text"
-                        id="search_field_input"
-                        placeholder="Search..."
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                        className="p-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                    />
-                </div>
-            </div>
-            <button
-                type="button"
-                className="rounded bg-blue-600 px-2 py-1 text-xl font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-            >
-                Send Interview
-            </button>
-            </div>
-            
-            <div className="mt-8 flow-root">
-                <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block min-w-full py-2 align-middle">
-                        <table id="table_id" className="min-w-full divide-y divide-gray-300">
-                            <thead>
-                                <tr>
-                                    <th scope="col" className="relative px-7 sm:w-12 sm:px-6">
-                                        <input
-                                            type="checkbox"
-                                            className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
-                                            onChange={handleSelectAll}
-                                            checked={selectedPeople.length === people.length}
-                                        />
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
-                                    >
-                                        Name
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Title
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Email
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Role
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-200 bg-white">
-                                {people.map((person) => (
-                                    <tr key={person.email}>
-                                        <td className="relative px-7 sm:w-12 sm:px-6">
-                                            <input
-                                                type="checkbox"
-                                                className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
-                                                checked={selectedPeople.includes(person.email)}
-                                                onChange={() => handleCheckboxChange(person.email)}
-                                            />
-                                        </td>
-                                        <td 
-                                            className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 hover:text-blue-600 cursor-pointer"
-                                            onClick={() => handleNameClick(person)}
-                                        >
-                                            {person.name}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.title}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.email}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.role}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                <div className="border-t border-gray-100">
+                    <dl className="divide-y divide-gray-100">
+                        <div className="px-4 py-6 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                            <div>
+                                <dt className="text-sm font-medium text-gray-900">Full name</dt>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700">{person.name}</dd>
+                            </div>
+                            <div>
+                                <dt className="text-sm font-medium text-gray-900">Application for</dt>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700">{person.title}</dd>
+                            </div>
+                        </div>
+                        <div className="px-4 py-6 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                            <div>
+                                <dt className="text-sm font-medium text-gray-900">Email</dt>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700">{person.email}</dd>
+                            </div>
+                            <div>
+                                <dt className="text-sm font-medium text-gray-900">Years of Experience</dt>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700">{person.yearsOfExperience}</dd>
+                            </div>
+                        </div>
+                        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium text-gray-900">Skills</dt>
+                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                <ul className="grid grid-cols-3 gap-x-4 gap-y-2 list-disc pl-5">
+                                    {person.skills.map((skill, index) => (
+                                        <li key={index}>{skill}</li>
+                                    ))}
+                                </ul>
+                            </dd>
+                        </div>
+                        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium text-gray-900">Resume Score</dt>
+                            <dd className="mt-1 text-2xl leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                {person.resumeScore}
+                            </dd>
+                        </div>
+                        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium text-gray-900">Questions Asked</dt>
+                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                {person.questions[0].question}
+                            </dd>
+                        </div>
+                        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium text-gray-900">Answers</dt>
+                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                {person.questions[0].answer}
+                            </dd>
+                        </div>
+                        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium leading-6 text-gray-900">Attachments</dt>
+                            <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
+                                    {person.attachments.map((attachment, index) => (
+                                        <li key={index} className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                                            <div className="flex w-0 flex-1 items-center">
+                                                <PaperClipIcon aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-gray-400" />
+                                                <div className="ml-4 flex min-w-0 flex-1 gap-2">
+                                                    <span className="truncate font-medium">{attachment.name}</span>
+                                                    <span className="flex-shrink-0 text-gray-400">{attachment.size}</span>
+                                                </div>
+                                            </div>
+                                            <div className="ml-4 flex-shrink-0">
+                                                <a
+                                                    href={`/resumes/${attachment.fileName}`}
+                                                    download
+                                                    className="font-medium text-blue-600 hover:text-blue-500"
+                                                >
+                                                    Download
+                                                </a>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </dd>
+                        </div>
+                        <div className="px-4 py-6 flex justify-center">
+                            <button
+                                type="submit"
+                                className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                            >
+                                Send Interview
+                            </button>
+                        </div>
+                    </dl>
                 </div>
             </div>
-            {isModalOpen && <Modal person={selectedPerson} closeModal={closeModal} />}
         </div>
     )
 }

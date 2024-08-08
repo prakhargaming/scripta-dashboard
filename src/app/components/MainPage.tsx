@@ -18,20 +18,23 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
-  PaperClipIcon
+  PaperClipIcon,
+  PaperAirplaneIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Dashboard from './Dashboard';
 import Scored from './Scored-Resumes';
 import Filtered from './Filter-Resumes';
 import Tracker from './Interview-Tracker'
+import Upload from './UploadResume'
 import Image from 'next/image'
 
 const navigation = [
 { name: 'All Applicants', href: '#', icon: HomeIcon, current: true, component: Dashboard },
 { name: 'Past Questions', href: '#', icon: UsersIcon, current: false, component: Scored },
 { name: 'Filter Resumes', href: '#', icon: MagnifyingGlassIcon, current: false, component: Filtered },
-{ name: 'Interview Dashboard', href: '#', icon: PaperClipIcon, current: false, component: Filtered },
+{ name: 'Interview Dashboard', href: '#', icon: PaperClipIcon, current: false, component: Tracker },
+{ name: 'Upload Resumes', href: '#', icon: PaperAirplaneIcon, current: false, component: Upload },
 ]
 
 const teams = [

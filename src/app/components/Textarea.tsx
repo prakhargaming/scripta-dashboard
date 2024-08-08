@@ -6,19 +6,24 @@ import { CalendarIcon, PaperClipIcon, TagIcon, UserCircleIcon } from '@heroicons
 import AWS from 'aws-sdk';
 
 AWS.config.update({
+  accessKeyId: process.env.NEXT_PUBLIC_ACCESS_KEY_ID,
+  secretAccessKey: process.env.NEXT_PUBLIC_SECRET_ACCESS_KEY, 
+  endpoint: 'https://nyc3.digitaloceanspaces.com'
 });
 
 const s3 = new AWS.S3();
 
 const companies = [
-  { id: 1, name: "Apple Inc." },
-  { id: 2, name: "Google LLC" },
+  { id: 1, name: "All" },
+  { id: 2, name: "Apple Inc." },
+  { id: 3, name: "Google LLC" },
   // ... (add all companies from comboboxData.companies)
 ];
 
 const jobPositions = [
-  { id: 1, name: "Software Engineer" },
-  { id: 2, name: "Data Scientist" },
+  { id: 1, name: "All" },
+  { id: 2, name: "Software Engineer" },
+  { id: 3, name: "Data Scientist" },
   // ... (add all positions from comboboxData.jobPositions)
 ];
 
